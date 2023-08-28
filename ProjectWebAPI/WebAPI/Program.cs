@@ -4,6 +4,8 @@ using Repository.Common;
 using Service.Common;
 using Service;
 using Repository;
+using System.Reflection;
+using Common;
 
 namespace WebAPI
 {
@@ -15,15 +17,19 @@ namespace WebAPI
 
             builder.Services.AddControllers();
 
-            // DBcontext -----------------------------------------
+            // DBcontext 
             builder.Services.AddDbContext<JustStudentsContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DBconnection")));
-            // -----------------------------------------------
+            // ----------
 
             // dependency injection
             builder.Services.AddScoped<IService, StudentService>();
             builder.Services.AddScoped<IRepository, StudentRepository>();
-            // ------------------------------------------------
+            // ----------
+
+            // AutoMapper
+            builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
+            // -----------
 
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

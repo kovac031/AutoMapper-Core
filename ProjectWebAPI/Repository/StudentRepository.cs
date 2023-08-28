@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Model;
 using Repository.Common;
 using System;
@@ -12,31 +13,31 @@ namespace Repository
 {
     public class StudentRepository : IRepository
     {
-        //public readonly IMapper _mapper; // AutoMapper
+        public readonly IMapper _mapper; // AutoMapper
         public JustStudentsContext Context { get; set; }
-        public StudentRepository(JustStudentsContext context) // IMapper dodao za AutoMapper
+        public StudentRepository(JustStudentsContext context, IMapper mapper) // IMapper dodao za AutoMapper
         {
             Context = context;
-            //_mapper = mapper;
+            _mapper = mapper;
         }
         //----------------- GET ALL --------------
         public async Task<List<StudentDTO>> GetAllAsync()
         {
             IQueryable<Student> student = Context.Students;
 
-            List<StudentDTO> list = await student.Select(x => new StudentDTO()
-            {
-                Id = x.Id,
-                FirstName = x.FirstName,
-                LastName = x.LastName,
-                DateOfBirth = x.DateOfBirth,
-                EmailAddress = x.EmailAddress,
-                RegisteredOn = x.RegisteredOn
-            }).ToListAsync<StudentDTO>();
+            //List<StudentDTO> list = await student.Select(x => new StudentDTO()
+            //{
+            //    Id = x.Id,
+            //    FirstName = x.FirstName,
+            //    LastName = x.LastName,
+            //    DateOfBirth = x.DateOfBirth,
+            //    EmailAddress = x.EmailAddress,
+            //    RegisteredOn = x.RegisteredOn
+            //}).ToListAsync<StudentDTO>();
 
-            return list;
+            //return list;
 
-            //return await _mapper.ProjectTo<StudentDTO>(student).ToListAsync();
+            return await _mapper.ProjectTo<StudentDTO>(student).ToListAsync();
         }
     }
 }

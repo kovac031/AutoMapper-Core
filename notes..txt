@@ -24,6 +24,17 @@ sve checked osim Docker
 
 * get all radi, gotov setup (autofac netreba jer .NET Core ima taj dio built in)
 
+--------- AUTOMAPPER -----------
+
+- novi folder Common
+	- nova klasa MapperProfile
+- instalirati Automapper i AutoMapper.Extensions.Microsoft.DependencyInjection, moze najnoviji jer sam na .NET 7
+	- u Common, DAL, Repository, Model, WebAPI foldere
+- dodati dio u Program.cs
+
+----------------------------------
+
+- CRUD
 
 	
 
