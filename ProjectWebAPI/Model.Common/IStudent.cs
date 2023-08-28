@@ -9,10 +9,10 @@ namespace Model.Common
     public interface IStudent
     {
         Guid Id { get; set; }
-        string FirstName { get; set; }
-        string LastName { get; set; }
+        string? FirstName { get; set; }
+        string? LastName { get; set; }
         DateTime DateOfBirth { get; set; }
-        string EmailAddress { get; set; }
+        string? EmailAddress { get; set; }
         DateTime RegisteredOn { get; set; }
     }
 }
