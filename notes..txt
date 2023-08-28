@@ -1,0 +1,30 @@
+---------------------------------------------------------------------------------------------
+new ASP .NET Core Web API (a ne Web App)
+.NET 7
+authentication nista
+sve checked osim Docker
+-----------------------------------------------------------------------------------------------
+
+- novi kontroler, nasljedjuje od ControllerBase
+- multilayer arhitektura standardno
+
+- instaliram Microsoft.EntityFrameworkCore.SqlServer 7 u DAL, Repositorij i WebAPI folder
+- isto Microsoft.EntityFrameworkCore.Tools i Microsoft.EntityFrameworkCore.Design
+
+- pravim DBcontext (obavezno DAL prije imati, tamo ga ciljamo)
+	- desni klik na solution
+	- dotnet tool install --global dotnet-ef
+	- desni klik na WebAPI
+	- dotnet ef dbcontext scaffold "data source=VREMENSKISTROJ;initial catalog=JustStudents;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;TrustServerCertificate=true" Microsoft.EntityFrameworkCore.SqlServer --output-dir ../DAL --project ./WebAPI.csproj
+	- nazvao ga je JustStudentContext automatski jbg
+
+- dodam connection string u appsettings.json
+- dodam DBcontext dio u Program.cs
+- dodam DI dio u Program.cs
+
+* get all radi, gotov setup (autofac netreba jer .NET Core ima taj dio built in)
+
+
+	
+
+
