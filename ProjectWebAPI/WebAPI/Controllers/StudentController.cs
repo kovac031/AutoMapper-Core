@@ -119,31 +119,31 @@ namespace WebAPI.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, $"Error for DeleteAsync: {x.Message}");
             }
         }
-        //// ---------------- GET ALL WITH SORTING, PAGING, FILTERING ----------------
-        //[HttpGet]
-        //[Route("params")]
-        //public async Task<HttpResponseMessage> ParamsAsync(
-        //    [FromUri] string sortBy = null,
-        //    [FromUri] string firstName = null, [FromUri] string lastName = null,
-        //    [FromUri] string dobBefore = null, [FromUri] string dobAfter = null,
-        //    [FromUri] string regBefore = null, [FromUri] string regAfter = null,
-        //    [FromUri] string pageNumber = null, [FromUri] string studentsPerPage = null) // bez null nedaje listu ako ne saljem parametar
-        //{
-        //    try
-        //    {
-        //        List<StudentDTO> list = await Service.ParamsAsync(
-        //            sortBy,
-        //            firstName, lastName,
-        //            dobBefore, dobAfter,
-        //            regBefore, regAfter,
-        //            pageNumber, studentsPerPage);
+        // ---------------- GET ALL WITH SORTING, PAGING, FILTERING ----------------
+        [HttpGet]
+        [Route("params")]
+        public async Task<IActionResult> ParamsAsync(
+            [FromQuery] string sortBy = null,
+            [FromQuery] string firstName = null, [FromQuery] string lastName = null,
+            [FromQuery] string dobBefore = null, [FromQuery] string dobAfter = null,
+            [FromQuery] string regBefore = null, [FromQuery] string regAfter = null,
+            [FromQuery] string pageNumber = null, [FromQuery] string studentsPerPage = null) // bez null nedaje listu ako ne saljem parametar
+        {
+            try
+            {
+                List<StudentDTO> list = await Service.ParamsAsync(
+                    sortBy,
+                    firstName, lastName,
+                    dobBefore, dobAfter,
+                    regBefore, regAfter,
+                    pageNumber, studentsPerPage);
 
-        //        return Request.CreateResponse(HttpStatusCode.OK, list);
-        //    }
-        //    catch (Exception x)
-        //    {
-        //        return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, $"Error for ParamsAsync: {x.Message}");
-        //    }
-        //}
+                return Ok(list);
+            }
+            catch (Exception x)
+            {
+                return StatusCode((int)HttpStatusCode.InternalServerError, $"Error for ParamsAsync: {x.Message}");
+            }
+        }
     }
 }

@@ -38,6 +38,7 @@ sve checked osim Docker
 - ne provjeravam u Postmanu, iako moze i to, nego u browseru onaj Swagger UI
 - izmjene u kontroleru (IActionResult)
 - u Student i StudentDTO postavio ? za FirstName, LastName, EmailAddress jer se bunio kod edita da treba sve za edit a ne bi trebo
+- za params dovoljno zamijeniti FromUri sa FromQuery
 	- 
 	
 
