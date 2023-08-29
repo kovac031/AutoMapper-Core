@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Model;
 using Service.Common;
 
@@ -6,45 +7,86 @@ namespace MVC.Controllers
 {
     public class StudentController : Controller
     {
-        public string Index()
-        {
-            return "Provjera";
-        }
-        public IActionResult ViewMethod()
-        {
-            return View();
-        }
-        //
+        public readonly IMapper _mapper;
         public IService Service { get; set; }
-        public StudentController(IService service)
+        public StudentController(IService service, IMapper mapper)
         {
             Service = service;
+            _mapper = mapper;
         }
         // ---------------- GET ALL ----------------        
         public async Task<ActionResult> ListStudents()
         {
             List<StudentDTO> listDTO = await Service.GetAllAsync();
-            List<StudentView> listView = new List<StudentView>();
 
-            foreach (StudentDTO studentDTO in listDTO)
-            {
-                StudentView studentView = new StudentView();
-
-                studentView.Id = studentDTO.Id;
-                studentView.FirstName = studentDTO.FirstName;
-                studentView.LastName = studentDTO.LastName;
-                studentView.DateOfBirth = studentDTO.DateOfBirth;
-                studentView.EmailAddress = studentDTO.EmailAddress;
-                studentView.RegisteredOn = studentDTO.RegisteredOn;
-
-                listView.Add(studentView);
-            }
+            List<StudentView> listView = _mapper.Map<List<StudentView>>(listDTO);
+            
             return View(listView);
         }
-        public async Task<ActionResult> Mama()
+        // ---------------- GET ONE BY ID ----------------
+        public async Task<ActionResult> GetOneStudent(Guid id)
+        {
+            StudentDTO studentDTO = await Service.GetOneByIdAsync(id);
+            StudentView studentView = _mapper.Map<StudentView>(studentDTO);
+            return View(studentView);
+        }
+        // ---------------- CREATE NEW ----------------
+        [HttpGet]
+        public async Task<ActionResult> CreateStudent()
         {
             return View();
         }
+        [HttpPost]
+        public async Task<ActionResult> CreateStudent(StudentView studentView)
+        {
+            try
+            {
+                StudentDTO studentDTO = _mapper.Map<StudentDTO>(studentView);
 
+                bool created = await Service.CreateAsync(studentDTO);
+                if (!created)
+                {
+                    return View("Failed to create");
+                }
+                return RedirectToAction("ListStudents");
+            }
+            catch (Exception)
+            {
+                return View("Exception");
+            }
+        }
+        // ---------------- EDIT ----------------
+        [HttpGet]
+        public async Task<ActionResult> EditStudent(Guid id)
+        {
+            StudentDTO studentDTO = await Service.GetOneByIdAsync(id);
+            StudentView studentView = _mapper.Map<StudentView>(studentDTO);
+            return View(studentView);
+        }
+        [HttpPost]
+        public async Task<ActionResult> EditStudent(StudentView studentView)
+        {
+            try
+            {
+                StudentDTO studentDTO = _mapper.Map<StudentDTO>(studentView);
+
+                bool created = await Service.EditAsync(studentDTO, studentDTO.Id);
+                if (!created)
+                {
+                    return View("Failed to edit");
+                }
+                return RedirectToAction("ListStudents");
+            }
+            catch (Exception)
+            {
+                return View("Exception");
+            }
+        }
+        // ---------------- DELETE ----------------
+        public async Task<ActionResult> DeleteStudent(Guid id)
+        {
+            await Service.DeleteAsync(id);
+            return RedirectToAction("ListStudents");
+        }
     }
 }

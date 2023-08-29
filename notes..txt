@@ -13,7 +13,7 @@ sve checked osim Docker
 
 - pravim DBcontext (obavezno DAL prije imati, tamo ga ciljamo)
 	- desni klik na solution > terminal
-	- dotnet tool install --global dotnet-ef
+	- dotnet tool install --global dotnet-ef (krivo sam shvatio, ovo instalira na kompjuter nesto, ne u solution samo, tako da samo jednom treba instalirati to)
 	- desni klik na WebAPI / MVC > terminal
 	- dotnet ef dbcontext scaffold "data source=VREMENSKISTROJ;initial catalog=JustStudents;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;TrustServerCertificate=true" Microsoft.EntityFrameworkCore.SqlServer --output-dir ../DAL --project ./WebAPI.csproj
 	- nazvao ga je JustStudentContext automatski jbg
@@ -29,7 +29,7 @@ sve checked osim Docker
 - novi folder Common
 	- nova klasa MapperProfile
 - instalirati Automapper i AutoMapper.Extensions.Microsoft.DependencyInjection, moze najnoviji jer sam na .NET 7
-	- u Common, DAL, Repository, Model, WebAPI foldere
+	- u Common, DAL, Repository, Model, WebAPI foldere (ili MVC)
 - dodati dio u Program.cs
 
 ----------------------------------
@@ -43,6 +43,7 @@ sve checked osim Docker
 
 - CRUD MVC
 - kod add view nije prolazio StudentView model, pa sam napravio sa Student modelom (dbcontext), i samo promijenio @using nakon sto je generiran
+- GetAllAsync naziv metode u kontroleru i view pravi problem, preimenovati i radi
 	
 
 

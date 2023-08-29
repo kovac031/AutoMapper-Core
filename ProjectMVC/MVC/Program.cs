@@ -3,6 +3,7 @@ using Repository;
 using Repository.Common;
 using Service;
 using Service.Common;
+using Common;
 
 namespace MVC
 {
@@ -24,6 +25,10 @@ namespace MVC
             builder.Services.AddScoped<IRepository, StudentRepository>();
             // ----------
 
+            // AutoMapper
+            builder.Services.AddAutoMapper(typeof(MapperProfile).Assembly);
+            // -----------
+
             var app = builder.Build();
 
             if (!app.Environment.IsDevelopment())
@@ -41,7 +46,7 @@ namespace MVC
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Student}/{action=ListStudents}/{id?}");
 
             app.Run();
         }
