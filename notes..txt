@@ -8,13 +8,13 @@ sve checked osim Docker
 - novi kontroler, nasljedjuje od ControllerBase
 - multilayer arhitektura standardno
 
-- instaliram Microsoft.EntityFrameworkCore.SqlServer 7 u DAL, Repositorij i WebAPI folder
+- instaliram Microsoft.EntityFrameworkCore.SqlServer 7 u DAL, Repositorij i WebAPI folder (ili MVC)
 - isto Microsoft.EntityFrameworkCore.Tools i Microsoft.EntityFrameworkCore.Design
 
 - pravim DBcontext (obavezno DAL prije imati, tamo ga ciljamo)
-	- desni klik na solution
+	- desni klik na solution > terminal
 	- dotnet tool install --global dotnet-ef
-	- desni klik na WebAPI
+	- desni klik na WebAPI / MVC > terminal
 	- dotnet ef dbcontext scaffold "data source=VREMENSKISTROJ;initial catalog=JustStudents;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework;TrustServerCertificate=true" Microsoft.EntityFrameworkCore.SqlServer --output-dir ../DAL --project ./WebAPI.csproj
 	- nazvao ga je JustStudentContext automatski jbg
 
@@ -34,12 +34,15 @@ sve checked osim Docker
 
 ----------------------------------
 
-- CRUD
+- CRUD WebAPI
 - ne provjeravam u Postmanu, iako moze i to, nego u browseru onaj Swagger UI
 - izmjene u kontroleru (IActionResult)
 - u Student i StudentDTO postavio ? za FirstName, LastName, EmailAddress jer se bunio kod edita da treba sve za edit a ne bi trebo
 - za params dovoljno zamijeniti FromUri sa FromQuery
-	- 
+
+
+- CRUD MVC
+- kod add view nije prolazio StudentView model, pa sam napravio sa Student modelom (dbcontext), i samo promijenio @using nakon sto je generiran
 	
 
 
