@@ -36,5 +36,10 @@ namespace Service
             bool result = await Repository.DeleteAsync(id);
             return result;
         }
+        public async Task<List<StudentDTO>> ListWithParams(string sortBy)
+        {
+            List<StudentDTO> list = await Repository.ListWithParams(sortBy);
+            return list;
+        }
     }
 }

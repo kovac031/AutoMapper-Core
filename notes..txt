@@ -44,6 +44,8 @@ sve checked osim Docker
 - CRUD MVC
 - kod add view nije prolazio StudentView model, pa sam napravio sa Student modelom (dbcontext), i samo promijenio @using nakon sto je generiran
 - GetAllAsync naziv metode u kontroleru i view pravi problem, preimenovati i radi
-	
+
+- PagedList nije kompatibilan sa .NET7, instalirati X.PagedList i X.PagedList.Mvc.Core za paging
+	 promijeniti Using u kontroleru i viewu
 
 
