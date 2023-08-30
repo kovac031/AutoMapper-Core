@@ -19,7 +19,7 @@ CRUD overview:
 ![scr1](https://github.com/kovac031/AutoMapper-Core/blob/main/scr1.jpg)
 
 Using parameters when retrieving list:
-![scr2](https://github.com/kovac031/AutoMapper-Core/blob/main/scr1.jpg)
+![scr2](https://github.com/kovac031/AutoMapper-Core/blob/main/scr2.jpg)
 
 ## MVC
 - reusing from above, minor changes due to WebApi<->MVC differences
