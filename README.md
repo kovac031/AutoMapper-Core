@@ -20,3 +20,11 @@ CRUD overview:
 
 Using parameters when retrieving list:
 ![scr2](https://github.com/kovac031/AutoMapper-Core/blob/main/scr1.jpg)
+
+## MVC
+- reusing from above, minor changes due to WebApi<->MVC differences
+- using X.PagedList instead of PagedList (due to incompatibility)
+
+## Screenshot from MVC
+Using parameters, included snapshots from other Views:
+![scr3](https://github.com/kovac031/AutoMapper-Core/blob/main/scr3.jpg)
